@@ -100,7 +100,6 @@ abstract class TestCase extends OrchestraTestCase
     {
         $mock = \Mockery::mock(UrlParser::class, [
             new \GuzzleHttp\Client,
-            new \Symfony\Component\DomCrawler\Crawler,
         ])->makePartial();
 
         $mock
