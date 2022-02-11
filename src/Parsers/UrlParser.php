@@ -5,7 +5,6 @@ namespace Gallib\ShortUrl\Parsers;
 use Gallib\ShortUrl\Url;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Symfony\Component\DomCrawler\Crawler;
 
 class UrlParser
 {
@@ -13,11 +12,6 @@ class UrlParser
      * @var \GuzzleHttp\Client
      */
     protected $client;
-
-    /**
-     * @var \Symfony\Component\DomCrawler\Crawler
-     */
-    protected $crawler;
 
     /**
      * Create a new instance.
@@ -56,13 +50,7 @@ class UrlParser
      */
     public function setUrlInfos(Url $url)
     {
-        $crawler = new Crawler();
-        $crawler->addHtmlContent($this->getBody($url->url));
-
-        $titleNode = $crawler->filter('title');
-        $descriptionNode = $crawler->filter('meta[name="description"]');
-
-        $url->title = $titleNode->count() ? $titleNode->first()->text() : null;
-        $url->description = $descriptionNode->count() ? $descriptionNode->first()->attr('content') : null;
+        $url->title = null;
+        $url->description = null;
     }
 }
